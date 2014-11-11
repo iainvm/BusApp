@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Bus App</string>
+    <string name="title_section1">Home</string>
+    <string name="title_section2">Updates</string>
+    <string name="title_section3">Book Tickets</string>
+    <string name="title_section4">Map</string>
+    <string name="title_section5">Account Settings</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="action_example">Psuedo Login</string>
+    <string name="favourites_textbox_text">Favourites</string>
+    <string name="recent_textbox_text">Recent</string>
+
+</resources>
