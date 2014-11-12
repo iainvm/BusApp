@@ -12,5 +12,10 @@
     <string name="action_example">Psuedo Login</string>
     <string name="home_tab1_text">Favourites</string>
     <string name="home_tab2_text">Recent</string>
+    <string name="updates_tab1_text">All</string>
+    <string name="updates_tab2_text">Booked</string>
+    <string name="updates_tab3_text">Favourites</string>
+    <string name="updates_tab4_text">Recent</string>
+    <string name="updates_tab5_text">Close By</string>
 
 </resources>

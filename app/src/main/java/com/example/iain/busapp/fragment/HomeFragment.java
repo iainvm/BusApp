@@ -48,6 +48,7 @@ public class HomeFragment extends Fragment {
 
         createTabs(rootView);
         populateFavList(rootView);
+        populateRecentList(rootView);
 
         return rootView;
     }
@@ -79,14 +80,40 @@ public class HomeFragment extends Fragment {
 
     public void populateFavList(View rootView){
         String[] favsTitles = {"Bus Number 1", "Bus Number 2", "Bus Number 3", "Bus Number 4",
-                                "Bus Number 5" , "Bus Number 6" , "Bus Number 7" , "Bus Number 8" };
+                "Bus Number 5" , "Bus Number 6" , "Bus Number 7" , "Bus Number 8" };
         String[] favsDescs = {"Bus1 Status", "Bus2 Status", "Bus3 Status", "Bus Doesn\'t Exist",
-                            "Bus5 Status", "Bus6 Status", "Bus7 Status", "Bus Doesn\'t Exist"};
+                "Bus5 Status", "Bus6 Status", "Bus7 Status", "Bus Doesn\'t Exist"};
 
         favListAdapter theAdapter = new favListAdapter(this.getActivity(), favsTitles, favsDescs);
 
         // ListViews display data in a scrollable list
         ListView theListView = (ListView) rootView.findViewById(R.id.favListView);
+
+        // Tells the ListView what data to use
+        theListView.setAdapter(theAdapter);
+
+        theListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                String tvShowPicked = "You selected " +
+                        String.valueOf(adapterView.getItemAtPosition(i));
+
+                Toast.makeText(HomeFragment.this.getActivity(), tvShowPicked, Toast.LENGTH_SHORT).show();
+
+            }
+        });
+    }
+    public void populateRecentList(View rootView){
+        String[] recTitles = {"Bus Number 1", "Bus Number 2", "Bus Number 3", "Bus Number 4",
+                "Bus Number 5" , "Bus Number 6" , "Bus Number 7" , "Bus Number 8" };
+        String[] recDescs = {"Bus1 Status", "Bus2 Status", "Bus3 Status", "Bus Doesn\'t Exist",
+                "Bus5 Status", "Bus6 Status", "Bus7 Status", "Bus Doesn\'t Exist"};
+
+        favListAdapter theAdapter = new favListAdapter(this.getActivity(), recTitles, recDescs);
+
+        // ListViews display data in a scrollable list
+        ListView theListView = (ListView) rootView.findViewById(R.id.recListView);
 
         // Tells the ListView what data to use
         theListView.setAdapter(theAdapter);
