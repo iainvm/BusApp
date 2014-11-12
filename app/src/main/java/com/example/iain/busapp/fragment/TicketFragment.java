@@ -1,4 +1,4 @@
-package com.example.iain.busapp;
+package com.example.iain.busapp.fragment;
 
 import android.app.Activity;
 import android.app.Fragment;
@@ -7,10 +7,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.iain.busapp.MainActivity;
+import com.example.iain.busapp.R;
+
 /**
  * Created by iain on 11/11/14.
  */
-public class SettingsFragment extends Fragment {
+public class TicketFragment extends Fragment {
     /**
      * The fragment argument representing the section number for this
      * fragment.
@@ -21,21 +24,21 @@ public class SettingsFragment extends Fragment {
      * Returns a new instance of this fragment for the given section
      * number.
      */
-    public static SettingsFragment newInstance(int sectionNumber) {
-        SettingsFragment fragment = new SettingsFragment();
+    public static TicketFragment newInstance(int sectionNumber) {
+        TicketFragment fragment = new TicketFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_SECTION_NUMBER, sectionNumber);
         fragment.setArguments(args);
         return fragment;
     }
 
-    public SettingsFragment() {
+    public TicketFragment() {
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_settings, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_ticket, container, false);
         return rootView;
     }
 

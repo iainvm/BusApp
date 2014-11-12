@@ -1,27 +1,31 @@
 package com.example.iain.busapp;
 
-import android.app.Activity;
 
 import android.app.ActionBar;
-import android.app.Fragment;
 import android.app.FragmentManager;
 import android.os.Bundle;
-import android.view.LayoutInflater;
+import android.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.widget.DrawerLayout;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.support.v4.widget.DrawerLayout;
-import android.widget.Toast;
+
+import com.example.iain.busapp.fragment.HomeFragment;
+import com.example.iain.busapp.fragment.MapFragment;
+import com.example.iain.busapp.fragment.NavigationDrawerFragment;
+import com.example.iain.busapp.fragment.SettingsFragment;
+import com.example.iain.busapp.fragment.TicketFragment;
+import com.example.iain.busapp.fragment.UpdatesFragment;
 
 
-public class MainActivity extends Activity
+public class MainActivity extends FragmentActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
      */
     private NavigationDrawerFragment mNavigationDrawerFragment;
+
 
     /**
      * Used to store the last screen title. For use in {@link #restoreActionBar()}.
@@ -34,9 +38,6 @@ public class MainActivity extends Activity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-
-
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getFragmentManager().findFragmentById(R.id.navigation_drawer);
         mTitle = getTitle();
@@ -46,6 +47,7 @@ public class MainActivity extends Activity
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
     }
+
 
     @Override
     public void onNavigationDrawerItemSelected(int position) {
@@ -104,7 +106,6 @@ public class MainActivity extends Activity
         actionBar.setTitle(mTitle);
     }
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         if (!mNavigationDrawerFragment.isDrawerOpen()) {
@@ -132,5 +133,4 @@ public class MainActivity extends Activity
 
         return super.onOptionsItemSelected(item);
     }
-
 }

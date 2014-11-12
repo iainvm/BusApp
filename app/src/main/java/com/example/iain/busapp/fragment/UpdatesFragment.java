@@ -1,4 +1,4 @@
-package com.example.iain.busapp;
+package com.example.iain.busapp.fragment;
 
 import android.app.Activity;
 import android.app.Fragment;
@@ -7,10 +7,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.iain.busapp.MainActivity;
+import com.example.iain.busapp.R;
+
 /**
  * Created by iain on 11/11/14.
  */
-public class MapFragment extends Fragment {
+public class UpdatesFragment extends Fragment {
     /**
      * The fragment argument representing the section number for this
      * fragment.
@@ -21,21 +24,21 @@ public class MapFragment extends Fragment {
      * Returns a new instance of this fragment for the given section
      * number.
      */
-    public static MapFragment newInstance(int sectionNumber) {
-        MapFragment fragment = new MapFragment();
+    public static UpdatesFragment newInstance(int sectionNumber) {
+        UpdatesFragment fragment = new UpdatesFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_SECTION_NUMBER, sectionNumber);
         fragment.setArguments(args);
         return fragment;
     }
 
-    public MapFragment() {
+    public UpdatesFragment() {
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_map, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_updates, container, false);
         return rootView;
     }
 

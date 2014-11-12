@@ -1,52 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/home_container"
-    android:focusable="false">
+    android:focusable="false"
+    tools:context="com.example.app.MainActivity$HomeFragment">
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="25dp"
-        android:id="@+id/favourites_textbox"
+
+    <TabHost
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/tabHost"
         android:layout_alignParentTop="true"
-        android:text="@string/favourites_textbox_text"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentStart="true"
-        android:gravity="center_horizontal|top"
-        android:background="#BBBBBB"
-        android:editable="false"
-        android:focusable="false" />
+        android:layout_alignParentStart="true">
 
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/listView"
-        android:layout_centerHorizontal="true"
-        android:background="#FFFFFF"
-        android:layout_below="@+id/favourites_textbox"
-        android:layout_above="@+id/editText" />
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical">
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="25dp"
-        android:id="@+id/editText"
-        android:layout_centerVertical="true"
-        android:layout_alignParentEnd="true"
-        android:text="@string/recent_textbox_text"
-        android:layout_alignParentStart="true"
-        android:background="#BBBBBB"
-        android:gravity="center_horizontal|top"
-        android:focusable="false"
-        android:editable="false" />
+            <TabWidget
+                android:id="@android:id/tabs"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"/>
 
-    <ListView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/listView2"
-        android:background="#FFFFFF"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/editText" />
+            <FrameLayout
+                android:id="@android:id/tabcontent"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+
+                <LinearLayout
+                    android:id="@+id/tab1"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:orientation="vertical">
+
+                    <ListView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/favListView"
+                        android:background="#FFFFFF"/>
+
+                    </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/tab2"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:orientation="vertical">
+
+                    <ListView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/listView2"
+                        android:background="#FFFFFF"/>
+
+                    </LinearLayout>
+            </FrameLayout>
+        </LinearLayout>
+    </TabHost>
 
 
 </RelativeLayout>
