@@ -14,20 +14,11 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/favTitle"
+        android:id="@+id/text1"
         android:layout_toRightOf="@+id/listImage"
-        android:gravity="start|top"
+        android:gravity="start"
         android:textStyle="bold"
         android:textSize="22sp"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/favDesc"
-        android:layout_below="@id/favTitle"
-        android:layout_alignParentEnd="true"
-        android:gravity="end|bottom"
-        android:textSize="12sp"/>
 
 
 </RelativeLayout>

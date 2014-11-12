@@ -10,7 +10,7 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_example">Psuedo Login</string>
-    <string name="favourites_textbox_text">Favourites</string>
-    <string name="recent_textbox_text">Recent</string>
+    <string name="home_tab1_text">Favourites</string>
+    <string name="home_tab2_text">Recent</string>
 
 </resources>

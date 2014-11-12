@@ -67,12 +67,12 @@ public class HomeFragment extends Fragment {
 
         spec1 = tabHost.newTabSpec("spec1");
         spec1.setContent(R.id.tab1);
-        spec1.setIndicator("Tab1");
+        spec1.setIndicator(getString(R.string.home_tab1_text));
         tabHost.addTab(spec1);
 
         spec2 = tabHost.newTabSpec("spec2");
         spec2.setContent(R.id.tab2);
-        spec2.setIndicator("Tab2");
+        spec2.setIndicator(getString(R.string.home_tab2_text));
         tabHost.addTab(spec2);
 
     }
