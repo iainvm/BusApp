@@ -17,5 +17,8 @@
     <string name="updates_tab3_text">Favourites</string>
     <string name="updates_tab4_text">Recent</string>
     <string name="updates_tab5_text">Close By</string>
+    <string name="ticket_tab1_text">Favourites</string>
+    <string name="ticket_tab2_text">Recent</string>
+    <string name="ticket_tab3_text">Close By</string>
 
 </resources>
