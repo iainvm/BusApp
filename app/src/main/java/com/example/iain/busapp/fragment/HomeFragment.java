@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.example.iain.busapp.MainActivity;
 import com.example.iain.busapp.R;
+import com.example.iain.busapp.TestFRContract;
 import com.example.iain.busapp.adapter.favListAdapter;
 
 
@@ -36,7 +37,9 @@ public class HomeFragment extends Fragment {
         args.putInt(ARG_SECTION_NUMBER, sectionNumber);
         fragment.setArguments(args);
         return fragment;
+
     }
+
 
     public HomeFragment() {
     }
@@ -49,6 +52,7 @@ public class HomeFragment extends Fragment {
         createTabs(rootView);
         populateFavList(rootView);
         populateRecentList(rootView);
+        //TestFRContract.FeedEntry.TestFRDbHelper mDbHelper = new TestFRContract.FeedEntry.TestFRDbHelper(rootView.getContext());
 
         return rootView;
     }

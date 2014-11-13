@@ -16,6 +16,7 @@ import com.example.iain.busapp.fragment.NavigationDrawerFragment;
 import com.example.iain.busapp.fragment.SettingsFragment;
 import com.example.iain.busapp.fragment.TicketFragment;
 import com.example.iain.busapp.fragment.UpdatesFragment;
+import com.example.iain.busapp.TestFRContract.FeedEntry.*;
 
 
 public class MainActivity extends FragmentActivity
