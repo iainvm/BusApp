@@ -13,16 +13,12 @@ package com.example.iain.busapp.fragment;
         import com.example.iain.busapp.R;
 
 
-/**
- * Created by iain on 11/11/14.
- */
 public class BusFragment extends Fragment {
     /**
      * The fragment argument representing the section number for this
      * fragment.
      */
     private static final String ARG_SECTION_NUMBER = "section_number";
-    public static final String ARG_POSITION = "arg_position";
 
     /**
      * Returns a new instance of this fragment for the given section
