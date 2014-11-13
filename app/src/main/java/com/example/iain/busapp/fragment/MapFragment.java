@@ -1,7 +1,7 @@
 package com.example.iain.busapp.fragment;
 
 import android.app.Activity;
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,9 +10,6 @@ import android.view.ViewGroup;
 import com.example.iain.busapp.MainActivity;
 import com.example.iain.busapp.R;
 
-/**
- * Created by iain on 11/11/14.
- */
 public class MapFragment extends Fragment {
     /**
      * The fragment argument representing the section number for this

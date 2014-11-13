@@ -1,7 +1,7 @@
 package com.example.iain.busapp.fragment;
 
 import android.app.Activity;
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,23 +9,19 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TabHost;
-import android.widget.TabHost.TabSpec;
-import android.widget.Toast;
 
 import com.example.iain.busapp.MainActivity;
 import com.example.iain.busapp.R;
 import com.example.iain.busapp.adapter.favListAdapter;
 
 
-/**
- * Created by iain on 11/11/14.
- */
 public class TicketFragment extends Fragment {
     /**
      * The fragment argument representing the section number for this
      * fragment.
      */
     private static final String ARG_SECTION_NUMBER = "section_number";
+    OnBusSelectedListener mCallback;
     /**
      * Returns a new instance of this fragment for the given section
      * number.
@@ -50,6 +46,7 @@ public class TicketFragment extends Fragment {
         populateFavList(rootView);
         populateRecentList(rootView);
         populateCloseList(rootView);
+        eventHandle(rootView);
 
         return rootView;
     }
@@ -57,8 +54,19 @@ public class TicketFragment extends Fragment {
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
+        try {
+            mCallback = (OnBusSelectedListener) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString()
+                    + " must implement OnBusSelectedListener");
+        }
         ((MainActivity) activity).onSectionAttached(
                 getArguments().getInt(ARG_SECTION_NUMBER));
+    }
+
+    // Container Activity must implement this interface
+    public interface OnBusSelectedListener {
+        public void onBusSelected(int position);
     }
 
     public void createTabs(View rootView){
@@ -84,6 +92,35 @@ public class TicketFragment extends Fragment {
 
 
     }
+    public void eventHandle(View rootView){
+        ListView ticketFavListView = (ListView) rootView.findViewById(R.id.ticketFavList);
+        ticketFavListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                mCallback.onBusSelected(i);
+            }
+        });
+
+
+        ListView ticketRecListView = (ListView) rootView.findViewById(R.id.ticketRecentList);
+        ticketRecListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                mCallback.onBusSelected(i);
+            }
+        });
+
+        ListView ticketCloseView = (ListView) rootView.findViewById(R.id.ticketCloseList);
+        ticketCloseView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                mCallback.onBusSelected(i);
+            }
+        });
+    }
 
     public void populateFavList(View rootView){
         String[] favsTitles = {"Bus Number 1", "Bus Number 2", "Bus Number 3", "Bus Number 4",
@@ -98,18 +135,6 @@ public class TicketFragment extends Fragment {
 
         // Tells the ListView what data to use
         theListView.setAdapter(theAdapter);
-
-        theListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
-                String tvShowPicked = "You selected " +
-                        String.valueOf(adapterView.getItemAtPosition(i));
-
-                Toast.makeText(TicketFragment.this.getActivity(), tvShowPicked, Toast.LENGTH_SHORT).show();
-
-            }
-        });
     }
     public void populateRecentList(View rootView){
         String[] recTitles = {"Bus Number 1", "Bus Number 2", "Bus Number 3", "Bus Number 4",
@@ -124,18 +149,6 @@ public class TicketFragment extends Fragment {
 
         // Tells the ListView what data to use
         theListView.setAdapter(theAdapter);
-
-        theListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
-                String tvShowPicked = "You selected " +
-                        String.valueOf(adapterView.getItemAtPosition(i));
-
-                Toast.makeText(TicketFragment.this.getActivity(), tvShowPicked, Toast.LENGTH_SHORT).show();
-
-            }
-        });
     }
     public void populateCloseList(View rootView){
         String[] recTitles = {"Bus Number 1", "Bus Number 2", "Bus Number 3", "Bus Number 4",
@@ -150,17 +163,5 @@ public class TicketFragment extends Fragment {
 
         // Tells the ListView what data to use
         theListView.setAdapter(theAdapter);
-
-        theListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
-                String tvShowPicked = "You selected " +
-                        String.valueOf(adapterView.getItemAtPosition(i));
-
-                Toast.makeText(TicketFragment.this.getActivity(), tvShowPicked, Toast.LENGTH_SHORT).show();
-
-            }
-        });
     }
 }

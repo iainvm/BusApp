@@ -2,25 +2,29 @@ package com.example.iain.busapp;
 
 
 import android.app.ActionBar;
-import android.app.FragmentManager;
+import android.support.v4.app.FragmentManager;
 import android.os.Bundle;
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.example.iain.busapp.fragment.BusFragment;
 import com.example.iain.busapp.fragment.HomeFragment;
 import com.example.iain.busapp.fragment.MapFragment;
 import com.example.iain.busapp.fragment.NavigationDrawerFragment;
 import com.example.iain.busapp.fragment.SettingsFragment;
 import com.example.iain.busapp.fragment.TicketFragment;
 import com.example.iain.busapp.fragment.UpdatesFragment;
-import com.example.iain.busapp.TestFRContract.FeedEntry.*;
 
 
 public class MainActivity extends FragmentActivity
-        implements NavigationDrawerFragment.NavigationDrawerCallbacks {
+        implements NavigationDrawerFragment.NavigationDrawerCallbacks,
+                   HomeFragment.OnBusSelectedListener,
+                   TicketFragment.OnBusSelectedListener,
+                   UpdatesFragment.OnBusSelectedListener{
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
@@ -49,10 +53,8 @@ public class MainActivity extends FragmentActivity
                 (DrawerLayout) findViewById(R.id.drawer_layout));
     }
 
-
     @Override
     public void onNavigationDrawerItemSelected(int position) {
-        //Toast.makeText(MainActivity.this, position, Toast.LENGTH_SHORT).show();
         // update the main content by replacing fragments
         switch (position){
             case 0:
@@ -73,11 +75,28 @@ public class MainActivity extends FragmentActivity
         }
 
         if(fragment != null) {
-            FragmentManager fragmentManager = getFragmentManager();
+            FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction()
                     .replace(R.id.container, fragment)
                     .commit();
         }
+    }
+
+    public void onBusSelected(int position) {
+        Fragment newFragment = new BusFragment().newInstance(6);
+        Bundle args = new Bundle();
+        args.putInt("busID", position);
+        newFragment.setArguments(args);
+
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
+        // Replace whatever is in the fragment_container view with this fragment,
+        // and add the transaction to the back stack so the user can navigate back
+        transaction.replace(R.id.container, newFragment);
+        transaction.addToBackStack(null);
+
+        // Commit the transaction
+        transaction.commit();
     }
 
     public void onSectionAttached(int number) {
