@@ -8,13 +8,13 @@
         android:layout_height="0dip"
         android:layout_weight="50"
         android:id="@+id/displayMap"
-        android:src="#35ffc0" />
+        android:src="@drawable/staticmap" />
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dip"
         android:layout_weight="50"
-        android:background="#FFA726">
+        android:background="#FB8C00">
 
         <ImageView
             android:layout_width="wrap_content"

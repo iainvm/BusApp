@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -47,7 +48,7 @@ public class BusFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_bus, container, false);
+        final View rootView = inflater.inflate(R.layout.fragment_bus, container, false);
 
         eventHandle(rootView);
 
@@ -73,8 +74,10 @@ public class BusFragment extends Fragment {
                 ImageButton button = (ImageButton) getActivity().findViewById(R.id.imageFavBus);
                 if(temp.charAt(2*busID) == '1'){
                     button.setImageResource(R.drawable.ic_star);
+                    Toast.makeText(rootView.getContext(), "Added to favourites", Toast.LENGTH_SHORT).show();
                 }else{
                     button.setImageResource(R.drawable.ic_star_outline);
+                    Toast.makeText(rootView.getContext(), "Removed from favourites", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -104,6 +107,8 @@ public class BusFragment extends Fragment {
             favourites[i] = Integer.parseInt(token);
         }
 
+        ImageView testImage = (ImageView) rootView.findViewById(R.id.displayMap);
+        testImage.setScaleType(ImageView.ScaleType.FIT_XY);
 
         TextView testRoutesView = (TextView) rootView.findViewById(R.id.busRoutesView);
         testRoutesView.setText(testRoutes[busID]);

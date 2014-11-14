@@ -6,11 +6,14 @@ import android.content.res.Resources;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TabHost;
 import android.widget.TextView;
@@ -90,7 +93,7 @@ public class HomeFragment extends Fragment{
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-                String title = ((TextView)view.findViewById(R.id.favTitle)).getText().toString();
+                String title = ((TextView) view.findViewById(R.id.favTitle)).getText().toString();
 
                 mCallback.onBusSelected(title);
             }
@@ -152,19 +155,26 @@ public class HomeFragment extends Fragment{
         String[] favsTitles = new String[ titles.size() ];
         titles.toArray( favsTitles );
         String[] favsDescs = new String[ titles.size() ];
-        titles.toArray( favsDescs );
+        descs.toArray( favsDescs );
 
-        favListAdapter favAdapter = new favListAdapter(this.getActivity(), favsTitles, favsDescs, testCost);
 
-        // ListViews display data in a scrollable list
-        ListView favListView = (ListView) rootView.findViewById(R.id.favListView);
+        favListAdapter favAdapter;
 
-        // Tells the ListView what data to use
-        favListView.setAdapter(favAdapter);
+        if(favsTitles.length > 0){
+            favAdapter = new favListAdapter(this.getActivity(), favsTitles, favsDescs, testCost);
+            // ListViews display data in a scrollable list
+            ListView favListView = (ListView) rootView.findViewById(R.id.favListView);
+
+            // Tells the ListView what data to use
+            favListView.setAdapter(favAdapter);
+
+            TextView textV = (TextView) rootView.findViewById(R.id.errorText);
+            textV.setText("");
+        }else{
+            TextView textV = (TextView) rootView.findViewById(R.id.errorText);
+            textV.setText(R.string.favError);
+        }
     }
-
-
-
     public void populateRecentList(View rootView){
         Resources res = getResources();
         String[] recTitles = res.getStringArray(R.array.testRoute);

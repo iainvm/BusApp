@@ -26,6 +26,7 @@
     <string name="cost_ticket_label">Cost: £</string>
     <string name="bus_status_label">Status:</string>
     <string name="search">Search</string>
+    <string name="favError">You have no favourites,\n search for a bus and add it to favourties\n by clicking the star.</string>
 
 
     <string-array name="testRoute" >

@@ -6,6 +6,7 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:hint="Type here to search"
         android:id="@+id/searchBar"
         android:layout_gravity="center_horizontal" />
 
@@ -14,6 +15,5 @@
         android:layout_height="wrap_content"
         android:id="@+id/searchListView"
         android:background="#FFFFFF"/>
-
 
 </LinearLayout>

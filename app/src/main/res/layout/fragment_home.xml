@@ -28,7 +28,7 @@
 
             <FrameLayout
                 android:id="@android:id/tabcontent"
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="fill_parent">
 
                 <LinearLayout
@@ -43,7 +43,16 @@
                         android:id="@+id/favListView"
                         android:background="#FFFFFF"/>
 
-                    </LinearLayout>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        android:gravity="center_horizontal"
+                        android:textSize="22sp"
+                        android:text="@string/favError"
+                        android:id="@+id/errorText" />
+
+                </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/tab2"

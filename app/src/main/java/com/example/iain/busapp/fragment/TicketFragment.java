@@ -132,11 +132,13 @@ public class TicketFragment extends Fragment {
         });
     }
 
-    public void populateFavList(View rootView){
+    public void populateFavList(final View rootView){
+
         Resources res = getResources();
         String[] testRoutes = res.getStringArray(R.array.testRoute);
         String[] testCost = res.getStringArray(R.array.testCost);
         String[] testStatus = res.getStringArray(R.array.testStatus);
+
         SharedPreferences settings = getActivity().getSharedPreferences("favs", 0);
         String str = settings.getString("favs", "0,0,0,0,0,0,0,0,0,0");
         StringTokenizer tokenizer = new StringTokenizer(str, ",");
@@ -159,15 +161,25 @@ public class TicketFragment extends Fragment {
         String[] favsTitles = new String[ titles.size() ];
         titles.toArray( favsTitles );
         String[] favsDescs = new String[ titles.size() ];
-        titles.toArray( favsDescs );
+        descs.toArray( favsDescs );
 
-        favListAdapter favAdapter = new favListAdapter(this.getActivity(), favsTitles, favsDescs, testCost);
 
-        // ListViews display data in a scrollable list
-        ListView theListView = (ListView) rootView.findViewById(R.id.ticketFavList);
+        favListAdapter favAdapter;
 
-        // Tells the ListView what data to use
-        theListView.setAdapter(favAdapter);
+        if(favsTitles.length > 0){
+            favAdapter = new favListAdapter(this.getActivity(), favsTitles, favsDescs, testCost);
+            // ListViews display data in a scrollable list
+            ListView favListView = (ListView) rootView.findViewById(R.id.favListView);
+
+            // Tells the ListView what data to use
+            favListView.setAdapter(favAdapter);
+
+            TextView textV = (TextView) rootView.findViewById(R.id.errorText);
+            textV.setText("");
+        }else{
+            TextView textV = (TextView) rootView.findViewById(R.id.errorText);
+            textV.setText(R.string.favError);
+        }
     }
     public void populateRecentList(View rootView){
         Resources res = getResources();

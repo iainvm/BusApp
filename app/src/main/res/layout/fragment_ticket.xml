@@ -43,6 +43,16 @@
                         android:id="@+id/ticketFavList"
                         android:background="#FFFFFF"/>
 
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        android:gravity="center_horizontal"
+                        android:textSize="22sp"
+                        android:text="@string/favError"
+                        android:id="@+id/errorText" />
+
                 </LinearLayout>
 
                 <LinearLayout
