@@ -2,11 +2,8 @@ package com.example.iain.busapp;
 
 
 import android.app.ActionBar;
-import android.app.SearchManager;
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -15,8 +12,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.SearchView;
-import android.widget.Toast;
 
 import com.example.iain.busapp.fragment.BusFragment;
 import com.example.iain.busapp.fragment.HomeFragment;
@@ -29,15 +24,14 @@ import com.example.iain.busapp.fragment.UpdatesFragment;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.StringTokenizer;
 
 
 public class MainActivity extends FragmentActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks,
                    HomeFragment.OnBusSelectedListener,
                    TicketFragment.OnBusSelectedListener,
-                   UpdatesFragment.OnBusSelectedListener,
-                   SearchFragment.OnBusSelectedListener{
+                  UpdatesFragment.OnBusSelectedListener,
+                  SearchFragment.OnBusSelectedListener{
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
