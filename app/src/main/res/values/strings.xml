@@ -20,8 +20,12 @@
     <string name="ticket_tab1_text">Favourites</string>
     <string name="ticket_tab2_text">Recent</string>
     <string name="ticket_tab3_text">Close By</string>
-
-
+    <string name="departing_label">Departing From:</string>
+    <string name="destination_label">Going to:</string>
+    <string name="set_time_label">Time to depart:</string>
+    <string name="cost_ticket_label">Cost: £</string>
+    <string name="bus_status_label">Status:</string>
+    <string name="search">Search</string>
 
 
     <string-array name="testRoute" >
@@ -101,4 +105,17 @@
         <item>test status</item>
         <item>in a complicated relationship</item>
     </string-array>
+
+    <integer-array name="testFav">
+        <item>0</item>
+        <item>1</item>
+        <item>1</item>
+        <item>0</item>
+        <item>1</item>
+        <item>0</item>
+        <item>0</item>
+        <item>1</item>
+        <item>0</item>
+        <item>0</item>
+    </integer-array>
 </resources>

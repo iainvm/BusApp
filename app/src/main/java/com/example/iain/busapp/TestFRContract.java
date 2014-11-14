@@ -5,9 +5,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.provider.BaseColumns;
 
-/**
- * Created by iain on 13/11/14.
- */
 public final class TestFRContract {
     // To prevent someone from accidentally instantiating the contract class,
     // give it an empty constructor.
@@ -62,5 +59,6 @@ public final class TestFRContract {
                 onUpgrade(db, oldVersion, newVersion);
             }
         }
+
     }
 }

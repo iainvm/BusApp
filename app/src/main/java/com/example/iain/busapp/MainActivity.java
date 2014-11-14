@@ -2,13 +2,15 @@ package com.example.iain.busapp;
 
 
 import android.app.ActionBar;
-import android.support.v4.app.FragmentManager;
+import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.view.Menu;
+import android.view.View;
 
 import com.example.iain.busapp.fragment.BusFragment;
 import com.example.iain.busapp.fragment.HomeFragment;
@@ -17,6 +19,10 @@ import com.example.iain.busapp.fragment.NavigationDrawerFragment;
 import com.example.iain.busapp.fragment.SettingsFragment;
 import com.example.iain.busapp.fragment.TicketFragment;
 import com.example.iain.busapp.fragment.UpdatesFragment;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.StringTokenizer;
 
 
 public class MainActivity extends FragmentActivity
@@ -29,7 +35,7 @@ public class MainActivity extends FragmentActivity
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
      */
     private NavigationDrawerFragment mNavigationDrawerFragment;
-
+    public static final String PREFS_NAME = "favs";
 
     /**
      * Used to store the last screen title. For use in {@link #restoreActionBar()}.
@@ -45,6 +51,9 @@ public class MainActivity extends FragmentActivity
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getFragmentManager().findFragmentById(R.id.navigation_drawer);
         mTitle = getTitle();
+
+        SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+
 
         // Set up the drawer.
         mNavigationDrawerFragment.setUp(
@@ -74,27 +83,41 @@ public class MainActivity extends FragmentActivity
         }
 
         if(fragment != null) {
-            FragmentManager fragmentManager = getSupportFragmentManager();
-            fragmentManager.beginTransaction()
-                    .replace(R.id.container, fragment)
-                    .commit();
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.container, fragment);
+            transaction.addToBackStack(null);
+            transaction.commit();
         }
     }
 
-    public void onBusSelected(int position) {
-        Fragment newFragment = new BusFragment().newInstance(6);
+    public void onBusSelected(String title) {
+        Resources res = getResources();
+        String[] testTitles = res.getStringArray(R.array.testRoute);
+
+        List<String> listTitles = Arrays.asList(testTitles);
+        int position = listTitles.indexOf(title);
+        Fragment newFragment = BusFragment.newInstance(6);
         Bundle args = new Bundle();
         args.putInt("busID", position);
         newFragment.setArguments(args);
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-
-        // Replace whatever is in the fragment_container view with this fragment,
-        // and add the transaction to the back stack so the user can navigate back
         transaction.replace(R.id.container, newFragment);
         transaction.addToBackStack(null);
 
-        // Commit the transaction
+        transaction.commit();
+    }
+
+    public void onBusSelected(int position) {
+        Fragment newFragment = BusFragment.newInstance(6);
+        Bundle args = new Bundle();
+        args.putInt("busID", position);
+        newFragment.setArguments(args);
+
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.container, newFragment);
+        transaction.addToBackStack(null);
+
         transaction.commit();
     }
 
@@ -120,6 +143,7 @@ public class MainActivity extends FragmentActivity
 
     public void restoreActionBar() {
         ActionBar actionBar = getActionBar();
+        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
         actionBar.setDisplayShowTitleEnabled(true);
         actionBar.setTitle(mTitle);
     }
@@ -135,5 +159,8 @@ public class MainActivity extends FragmentActivity
             return true;
         }
         return super.onCreateOptionsMenu(menu);
+    }
+
+    public void onFavourited(View view){
     }
 }

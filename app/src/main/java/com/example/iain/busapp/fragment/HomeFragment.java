@@ -1,6 +1,8 @@
 package com.example.iain.busapp.fragment;
 
 import android.app.Activity;
+import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,15 +11,17 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TabHost;
+import android.widget.TextView;
 
 import com.example.iain.busapp.MainActivity;
 import com.example.iain.busapp.R;
 import com.example.iain.busapp.adapter.favListAdapter;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.StringTokenizer;
 
-/**
- * Created by iain on 11/11/14.
- */
+
 public class HomeFragment extends Fragment{
     /**
      * The fragment argument representing the section number for this
@@ -73,7 +77,8 @@ public class HomeFragment extends Fragment{
 
     // Container Activity must implement this interface
     public interface OnBusSelectedListener {
-        public void onBusSelected(int position);
+        public void onBusSelected(int i);
+        public void onBusSelected(String title);
     }
 
     public void eventHandle(View rootView){
@@ -82,7 +87,9 @@ public class HomeFragment extends Fragment{
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-                mCallback.onBusSelected(i);
+                String title = ((TextView)view.findViewById(R.id.favTitle)).getText().toString();
+
+                mCallback.onBusSelected(title);
             }
         });
 
@@ -114,12 +121,37 @@ public class HomeFragment extends Fragment{
 
     }
     public void populateFavList(final View rootView){
-        String[] favsTitles = {"fav Number 1", "Bus Number 2", "Bus Number 3", "Bus Number 4",
-                "Bus Number 5" , "Bus Number 6" , "Bus Number 7" , "Bus Number 8" };
-        String[] favsDescs = {"Bus1 Status", "Bus2 Status", "Bus3 Status", "Bus Doesn\'t Exist",
-                "Bus5 Status", "Bus6 Status", "Bus7 Status", "Bus Doesn\'t Exist"};
 
-        favListAdapter favAdapter = new favListAdapter(this.getActivity(), favsTitles, favsDescs);
+        Resources res = getResources();
+        String[] testRoutes = res.getStringArray(R.array.testRoute);
+        String[] testCost = res.getStringArray(R.array.testCost);
+        String[] testStatus = res.getStringArray(R.array.testStatus);
+
+        SharedPreferences settings = getActivity().getSharedPreferences("favs", 0);
+        String str = settings.getString("favs", "0,0,0,0,0,0,0,0,0,0");
+        StringTokenizer tokenizer = new StringTokenizer(str, ",");
+        int n = tokenizer.countTokens();
+        int[] favourites = new int[n];
+        for (int i = 0; i < n; i++) {
+            String token = tokenizer.nextToken();
+            favourites[i] = Integer.parseInt(token);
+        }
+
+        List<String> titles = new ArrayList<String>();
+        List<String> descs = new ArrayList<String>();
+        for (int i=0; i < favourites.length; i++){
+
+            if(favourites[i] == 1){
+                titles.add(testRoutes[i]);
+                descs.add(testStatus[i]);
+            }
+        }
+        String[] favsTitles = new String[ titles.size() ];
+        titles.toArray( favsTitles );
+        String[] favsDescs = new String[ titles.size() ];
+        titles.toArray( favsDescs );
+
+        favListAdapter favAdapter = new favListAdapter(this.getActivity(), favsTitles, favsDescs, testCost);
 
         // ListViews display data in a scrollable list
         ListView favListView = (ListView) rootView.findViewById(R.id.favListView);
@@ -128,12 +160,11 @@ public class HomeFragment extends Fragment{
         favListView.setAdapter(favAdapter);
     }
     public void populateRecentList(View rootView){
-        String[] recTitles = {"Bus Number 1", "Bus Number 2", "Bus Number 3", "Bus Number 4",
-                "Bus Number 5" , "Bus Number 6" , "Bus Number 7" , "Bus Number 8" };
-        String[] recDescs = {"Bus1 Status", "Bus2 Status", "Bus3 Status", "Bus Doesn\'t Exist",
-                "Bus5 Status", "Bus6 Status", "Bus7 Status", "Bus Doesn\'t Exist"};
-
-        favListAdapter recAdapter = new favListAdapter(this.getActivity(), recTitles, recDescs);
+        Resources res = getResources();
+        String[] recTitles = res.getStringArray(R.array.testRoute);
+        String[] testCost = res.getStringArray(R.array.testCost);
+        String[] recDescs = res.getStringArray(R.array.testStatus);
+        favListAdapter recAdapter = new favListAdapter(this.getActivity(), recTitles, recDescs, testCost);
 
         // ListViews display data in a scrollable list
         ListView recListView = (ListView) rootView.findViewById(R.id.recListView);
