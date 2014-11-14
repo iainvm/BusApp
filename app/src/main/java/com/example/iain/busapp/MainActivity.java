@@ -15,6 +15,7 @@ import android.view.View;
 
 import com.example.iain.busapp.fragment.BusFragment;
 import com.example.iain.busapp.fragment.HomeFragment;
+import com.example.iain.busapp.fragment.LoginFragment;
 import com.example.iain.busapp.fragment.MapFragment;
 import com.example.iain.busapp.fragment.NavigationDrawerFragment;
 import com.example.iain.busapp.fragment.SettingsFragment;
@@ -37,7 +38,6 @@ public class MainActivity extends FragmentActivity
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
      */
     private NavigationDrawerFragment mNavigationDrawerFragment;
-    public static final String PREFS_NAME = "favs";
 
     /**
      * Used to store the last screen title. For use in {@link #restoreActionBar()}.
@@ -54,13 +54,14 @@ public class MainActivity extends FragmentActivity
                 getFragmentManager().findFragmentById(R.id.navigation_drawer);
         mTitle = getTitle();
 
-        SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+        SharedPreferences favSettings = getSharedPreferences("favs", 0);
+        SharedPreferences loginSettings = getSharedPreferences("login", 0);
+
 //        SharedPreferences.Editor editor = settings.edit();
 //        editor.clear();
 //        editor.commit();
 
 
-        // Set up the drawer.
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
@@ -159,7 +160,13 @@ public class MainActivity extends FragmentActivity
             // Only show items in the action bar relevant to this screen
             // if the drawer is not showing. Otherwise, let the drawer
             // decide what to show in the action bar.
-            getMenuInflater().inflate(R.menu.main, menu);
+            SharedPreferences loginSettings = getSharedPreferences("login", 0);
+            String strLogin = loginSettings.getString("login", "0");
+            if(loginSettings.equals("1")){
+                getMenuInflater().inflate(R.menu.logged_menu, menu);
+            }else{
+                getMenuInflater().inflate(R.menu.main, menu);
+            }
             restoreActionBar();
             return true;
         }
@@ -181,11 +188,22 @@ public class MainActivity extends FragmentActivity
                 transaction.commit();
 
                 return true;
+            case R.id.login:
+
+                Fragment loginFragment = LoginFragment.newInstance(6);
+
+                FragmentTransaction transac = getSupportFragmentManager().beginTransaction();
+                transac.replace(R.id.container, loginFragment);
+                transac.addToBackStack(null);
+
+                transac.commit();
+
+                return true;
+
             default:
                 return false;
         }
     }
-
 
     public void onFavourited(View view){
     }

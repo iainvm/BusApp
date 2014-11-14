@@ -139,8 +139,13 @@ public class TicketFragment extends Fragment {
         String[] testCost = res.getStringArray(R.array.testCost);
         String[] testStatus = res.getStringArray(R.array.testStatus);
 
-        SharedPreferences settings = getActivity().getSharedPreferences("favs", 0);
-        String str = settings.getString("favs", "0,0,0,0,0,0,0,0,0,0");
+        SharedPreferences favSettings = getActivity().getSharedPreferences("favs", 0);
+        SharedPreferences loginSettings = getActivity().getSharedPreferences("login", 0);
+        String strLogin = loginSettings.getString("login", "0");
+        String str = "0,0,0,0,0,0,0,0,0,0";
+        if(strLogin.equalsIgnoreCase("1")){
+            str = favSettings.getString("favs", "0,0,0,0,0,0,0,0,0,0");
+        }
         StringTokenizer tokenizer = new StringTokenizer(str, ",");
         int n = tokenizer.countTokens();
         int[] favourites = new int[n];

@@ -58,15 +58,20 @@ public class BusFragment extends Fragment {
             @Override
             public void onClick(View v)
             {
-                SharedPreferences settings = getActivity().getSharedPreferences("favs", 0);
-                String str = settings.getString("favs", "0,0,0,0,0,0,0,0,0,0");
-                StringBuilder temp = new StringBuilder(str);
-                if(str.charAt(2*busID) == '1'){
+                SharedPreferences favSettings = getActivity().getSharedPreferences("favs", 0);
+                SharedPreferences loginSettings = getActivity().getSharedPreferences("login", 0);
+                String strLogin = loginSettings.getString("login", "0");
+                String strFavs = "0,0,0,0,0,0,0,0,0,0";
+                if(strLogin.equalsIgnoreCase("1")){
+                    strFavs = favSettings.getString("favs", "0,0,0,0,0,0,0,0,0,0");
+                }
+                StringBuilder temp = new StringBuilder(strFavs);
+                if(strFavs.charAt(2*busID) == '1'){
                     temp.setCharAt(2*busID, '0');
                 }else{
                     temp.setCharAt(2*busID, '1');
                 }
-                SharedPreferences.Editor editor = settings.edit();
+                SharedPreferences.Editor editor = favSettings.edit();
                 editor.putString("favs", temp.toString());
 
                 // Commit the edits!
@@ -97,9 +102,14 @@ public class BusFragment extends Fragment {
         String[] testDeparture = res.getStringArray(R.array.testDeparture);
         String[] testCost = res.getStringArray(R.array.testCost);
         String[] testStatus = res.getStringArray(R.array.testStatus);
-        SharedPreferences settings = getActivity().getSharedPreferences("favs", 0);
-        String str = settings.getString("favs", "0,0,0,0,0,0,0,0,0,0");
-        StringTokenizer tokenizer = new StringTokenizer(str, ",");
+        SharedPreferences favSettings = getActivity().getSharedPreferences("favs", 0);
+        SharedPreferences loginSettings = getActivity().getSharedPreferences("login", 0);
+        String strLogin = favSettings.getString("login", "0");
+        String strFavs = "0,0,0,0,0,0,0,0,0,0";
+        if(strLogin.equalsIgnoreCase("1")){
+            strFavs = favSettings.getString("favs", "0,0,0,0,0,0,0,0,0,0");
+        }
+        StringTokenizer tokenizer = new StringTokenizer(strFavs, ",");
         int n = tokenizer.countTokens();
         int[] favourites = new int[n];
         for (int i = 0; i < n; i++) {

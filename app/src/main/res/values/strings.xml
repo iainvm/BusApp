@@ -9,7 +9,7 @@
     <string name="title_section5">Account Settings</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="action_example">Psuedo Login</string>
+    <string name="action_example">Login</string>
     <string name="home_tab1_text">Favourites</string>
     <string name="home_tab2_text">Recent</string>
     <string name="updates_tab1_text">All</string>
