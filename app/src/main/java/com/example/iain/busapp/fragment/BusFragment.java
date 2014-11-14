@@ -15,6 +15,8 @@ import android.widget.Toast;
 import com.example.iain.busapp.MainActivity;
 import com.example.iain.busapp.R;
 
+import java.util.StringTokenizer;
+
 
 public class BusFragment extends Fragment {
     /**
@@ -63,13 +65,17 @@ public class BusFragment extends Fragment {
                 }else{
                     temp.setCharAt(2*busID, '1');
                 }
-
-                Toast.makeText(getActivity().getApplicationContext(),temp.toString(),Toast.LENGTH_SHORT).show();
                 SharedPreferences.Editor editor = settings.edit();
                 editor.putString("favs", temp.toString());
 
                 // Commit the edits!
                 editor.commit();
+                ImageButton button = (ImageButton) getActivity().findViewById(R.id.imageFavBus);
+                if(temp.charAt(2*busID) == '1'){
+                    button.setImageResource(R.drawable.ic_star);
+                }else{
+                    button.setImageResource(R.drawable.ic_star_outline);
+                }
             }
         });
 
@@ -88,6 +94,16 @@ public class BusFragment extends Fragment {
         String[] testDeparture = res.getStringArray(R.array.testDeparture);
         String[] testCost = res.getStringArray(R.array.testCost);
         String[] testStatus = res.getStringArray(R.array.testStatus);
+        SharedPreferences settings = getActivity().getSharedPreferences("favs", 0);
+        String str = settings.getString("favs", "0,0,0,0,0,0,0,0,0,0");
+        StringTokenizer tokenizer = new StringTokenizer(str, ",");
+        int n = tokenizer.countTokens();
+        int[] favourites = new int[n];
+        for (int i = 0; i < n; i++) {
+            String token = tokenizer.nextToken();
+            favourites[i] = Integer.parseInt(token);
+        }
+
 
         TextView testRoutesView = (TextView) rootView.findViewById(R.id.busRoutesView);
         testRoutesView.setText(testRoutes[busID]);
@@ -106,6 +122,13 @@ public class BusFragment extends Fragment {
 
         TextView testStatusView = (TextView) rootView.findViewById(R.id.busStatusView);
         testStatusView.setText(testStatus[busID]);
+
+        ImageButton button = (ImageButton) rootView.findViewById(R.id.imageFavBus);
+        if(favourites[busID] == 1){
+            button.setImageResource(R.drawable.ic_star);
+        }else{
+            button.setImageResource(R.drawable.ic_star_outline);
+        }
     }
 
     @Override

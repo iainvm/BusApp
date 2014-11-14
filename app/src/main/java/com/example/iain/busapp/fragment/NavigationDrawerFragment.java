@@ -101,8 +101,15 @@ public class NavigationDrawerFragment extends Fragment {
                 getString(R.string.title_section2),
                 getString(R.string.title_section3),
                 getString(R.string.title_section4),
-                getString(R.string.title_section5),
-        });
+                getString(R.string.title_section5)},
+                new int[]{
+                        R.drawable.ic_home,
+                        R.drawable.ic_information,
+                        R.drawable.ic_tag,
+                        R.drawable.ic_map_marker,
+                        R.drawable.ic_cog
+                }
+        );
 
         mDrawerListView.setAdapter(theAdapter);
 
@@ -114,6 +121,7 @@ public class NavigationDrawerFragment extends Fragment {
         });
 
         mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
+
         return mDrawerListView;
     }
 

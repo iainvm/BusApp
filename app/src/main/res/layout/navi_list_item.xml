@@ -2,8 +2,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="340sp"
     android:layout_height="wrap_content"
-    android:paddingBottom="20dp"
-    android:id="@+id/favRowContainer">
+    android:paddingBottom="10dp"
+    android:paddingTop="10dp"
+    android:id="@+id/naviRowContainer">
 
     <ImageView
         android:id="@+id/listImage"
@@ -16,7 +17,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/text1"
         android:layout_toRightOf="@+id/listImage"
-        android:gravity="start"
+        android:gravity="start|center_vertical"
         android:textStyle="bold"
         android:textSize="22sp"/>
 
