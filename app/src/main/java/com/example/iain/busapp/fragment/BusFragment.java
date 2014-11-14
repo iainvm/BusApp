@@ -58,10 +58,10 @@ public class BusFragment extends Fragment {
                 SharedPreferences settings = getActivity().getSharedPreferences("favs", 0);
                 String str = settings.getString("favs", "0,0,0,0,0,0,0,0,0,0");
                 StringBuilder temp = new StringBuilder(str);
-                if(str.charAt(busID) == '1'){
-                    temp.setCharAt(busID, '0');
+                if(str.charAt(2*busID) == '1'){
+                    temp.setCharAt(2*busID, '0');
                 }else{
-                    temp.setCharAt(busID, '1');
+                    temp.setCharAt(2*busID, '1');
                 }
 
                 Toast.makeText(getActivity().getApplicationContext(),temp.toString(),Toast.LENGTH_SHORT).show();

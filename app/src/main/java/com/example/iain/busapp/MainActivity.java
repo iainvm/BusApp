@@ -2,15 +2,21 @@ package com.example.iain.busapp;
 
 
 import android.app.ActionBar;
+import android.app.SearchManager;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.SearchView;
+import android.widget.Toast;
 
 import com.example.iain.busapp.fragment.BusFragment;
 import com.example.iain.busapp.fragment.HomeFragment;
@@ -18,6 +24,7 @@ import com.example.iain.busapp.fragment.MapFragment;
 import com.example.iain.busapp.fragment.NavigationDrawerFragment;
 import com.example.iain.busapp.fragment.SettingsFragment;
 import com.example.iain.busapp.fragment.TicketFragment;
+import com.example.iain.busapp.fragment.SearchFragment;
 import com.example.iain.busapp.fragment.UpdatesFragment;
 
 import java.util.Arrays;
@@ -29,7 +36,8 @@ public class MainActivity extends FragmentActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks,
                    HomeFragment.OnBusSelectedListener,
                    TicketFragment.OnBusSelectedListener,
-                   UpdatesFragment.OnBusSelectedListener{
+                   UpdatesFragment.OnBusSelectedListener,
+                   SearchFragment.OnBusSelectedListener{
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
@@ -53,6 +61,9 @@ public class MainActivity extends FragmentActivity
         mTitle = getTitle();
 
         SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+//        SharedPreferences.Editor editor = settings.edit();
+//        editor.clear();
+//        editor.commit();
 
 
         // Set up the drawer.
@@ -160,6 +171,27 @@ public class MainActivity extends FragmentActivity
         }
         return super.onCreateOptionsMenu(menu);
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        //return super.onOptionsItemSelected(item);
+        switch (item.getItemId()) {
+            case R.id.search:
+
+                Fragment newFragment = SearchFragment.newInstance(6);
+
+                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.container, newFragment);
+                transaction.addToBackStack(null);
+
+                transaction.commit();
+
+                return true;
+            default:
+                return false;
+        }
+    }
+
 
     public void onFavourited(View view){
     }
